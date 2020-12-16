@@ -8,7 +8,7 @@ import java.util.Iterator;
 public class Buyer implements People {
 
     private static Integer cnt = 0;
-    private String name;
+    private final String name;
     private int many;
     private ArrayList<String> possibleStates = new ArrayList<String>();
     private Iterator<String> possibleStatesIter;
