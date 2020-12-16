@@ -7,9 +7,11 @@ import java.util.ArrayList;
 public class productStorage {
     private final String name;
     private ArrayList<Product> storageProd = new ArrayList<Product>();
+    private int sumPrice;
 
     public productStorage(String name) {
         this.name = name;
+        sumPrice = 0;
     }
 
     public String getCashboxName() {
@@ -25,15 +27,7 @@ public class productStorage {
     }
 
     public int getPrice() {
-        int sum = 0;
-        if (!this.isEmpty()) {
-            for (Product product : this.storageProd) {
-                sum += product.getPrice() * product.getProdCnt();
-            }
-            return sum;
-        } else {
-            return 0;
-        }
+        return this.sumPrice;
     }
 
     public Product popProduct() {
@@ -42,6 +36,7 @@ public class productStorage {
         } else {
             Product prodOut = this.storageProd.get(0);
             this.storageProd.remove(0);
+            this.sumPrice -= prodOut.getPrice() * prodOut.getProdCnt();
             return prodOut;
         }
     }
@@ -69,6 +64,7 @@ public class productStorage {
         } else {
             this.storageProd.add(prod);
         }
+        this.sumPrice += prod.getPrice();
     }
 
     public boolean isEmpty() {

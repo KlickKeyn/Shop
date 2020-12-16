@@ -1,7 +1,10 @@
 package com.klickkeyn.shop;
 
+import com.klickkeyn.shop.store.Shop;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println();
+        Shop shop = new Shop();
+        shop.simulateShopWork();
     }
 }

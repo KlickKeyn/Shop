@@ -20,12 +20,12 @@ public class Buyer implements People {
         cnt++;
         this.name = "Покупатель №" + cnt.toString();
         this.money = money;
-        possibleStates.add("Пришёл");
-        possibleStates.add("Выбирает товар");
-        possibleStates.add("Выбрал товар");
-        possibleStates.add("Ожидает в очереди");
-        possibleStates.add("Обслуживается");
-        possibleStates.add("Обслужен");
+        possibleStates.add("пришёл");
+        possibleStates.add("выбирает товар");
+        possibleStates.add("выбрал товар");
+        possibleStates.add("вжидает в очереди");
+        possibleStates.add("обслуживается");
+        possibleStates.add("обслужен");
         this.possibleStatesIter = possibleStates.iterator();
         this.state = possibleStatesIter.next();
     }

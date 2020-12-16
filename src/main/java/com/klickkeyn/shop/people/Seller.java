@@ -6,11 +6,12 @@ import com.klickkeyn.shop.productStorage.productStorage;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class Seller implements People {
     private final String name;
     private static Integer cnt = 0;
-    private ArrayList<String> possibleStates = new ArrayList<String>();
+    private List<String> possibleStates = new ArrayList<String>();
     private Iterator<String> possibleStatesIter;
     private String state;
     private productStorage basket;
@@ -18,7 +19,7 @@ public class Seller implements People {
 
     public Seller(String name) {
         this.name = name;
-        Cashbox cashbox = new Cashbox(0);
+        cashbox = new Cashbox(0);
         possibleStates.add("Ожидает");
         possibleStates.add("Обслуживает покупателя");
         this.possibleStatesIter = possibleStates.iterator();
@@ -26,7 +27,7 @@ public class Seller implements People {
     }
 
     public int getMoney() {
-        return this.cashbox.getMoney();
+        return cashbox.getMoney();
     }
 
     public void nextState() {
