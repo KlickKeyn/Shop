@@ -1,6 +1,7 @@
 package com.klickkeyn.shop.people;
 
 import com.klickkeyn.shop.product.Product;
+import com.klickkeyn.shop.productStorage.productStorage;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,6 +14,7 @@ public class Buyer implements People {
     private ArrayList<String> possibleStates = new ArrayList<String>();
     private Iterator<String> possibleStatesIter;
     private String state;
+    private productStorage basket;
 
     public Buyer(int many) {
         cnt++;
@@ -44,11 +46,30 @@ public class Buyer implements People {
         return this.state;
     }
 
-    public void pushProduct() {
-
+    public boolean pushProduct(Product product) {
+        int newPrice = this.basket.getPrice() + product.getPrice();
+        if (newPrice <= this.many) {
+            this.basket.pushProduct(product);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Product popProduct() {
-        return null;
+        return this.basket.popProduct();
+    }
+
+    public void takeBasket(productStorage basket) {
+        this.basket = basket;
+    }
+
+    public productStorage giveBasket() {
+        return this.basket;
+    }
+
+    public int buy() {
+        this.many -= this.basket.getPrice();
+        return this.basket.getPrice();
     }
 }

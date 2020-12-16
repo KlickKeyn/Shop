@@ -24,12 +24,36 @@ public class productStorage {
         return sum;
     }
 
+    public int getPrice() {
+        int sum = 0;
+        if (!this.isEmpty()) {
+            for (Product product : this.storageProd) {
+                sum += product.getPrice() * product.getProdCnt();
+            }
+            return sum;
+        } else {
+            return 0;
+        }
+    }
+
     public Product popProduct() {
         if (this.isEmpty()) {
             return null;
         } else {
             Product prodOut = this.storageProd.get(0);
             this.storageProd.remove(0);
+            return prodOut;
+        }
+    }
+
+    public Product popProduct(int cnt) {
+        if (this.isEmpty()) {
+            return null;
+        } else {
+            Product prod = this.storageProd.get(0);
+            prod.setProdCnt(prod.getProdCnt() - cnt);
+            Product prodOut = this.storageProd.get(0);
+            prodOut.setProdCnt(cnt);
             return prodOut;
         }
     }
@@ -45,7 +69,6 @@ public class productStorage {
         } else {
             this.storageProd.add(prod);
         }
-
     }
 
     public boolean isEmpty() {

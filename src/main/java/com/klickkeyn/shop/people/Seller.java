@@ -1,6 +1,7 @@
 package com.klickkeyn.shop.people;
 
 import com.klickkeyn.shop.product.Product;
+import com.klickkeyn.shop.productStorage.productStorage;
 
 public class Seller implements People {
     private int many;
@@ -21,11 +22,24 @@ public class Seller implements People {
         return null;
     }
 
+    public boolean pushProduct(Product product) {
+
+        return false;
+    }
+
     public void pushProduct() {
 
     }
 
     public Product popProduct() {
+        return null;
+    }
+
+    public void takeBasket(productStorage basket) {
+
+    }
+
+    public productStorage giveBasket() {
         return null;
     }
 }
