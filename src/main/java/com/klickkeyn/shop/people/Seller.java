@@ -1,45 +1,63 @@
 package com.klickkeyn.shop.people;
 
+import com.klickkeyn.shop.cashbox.Cashbox;
 import com.klickkeyn.shop.product.Product;
 import com.klickkeyn.shop.productStorage.productStorage;
 
-public class Seller implements People {
-    private int many;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-    public Seller(int many) {
-        this.many = many;
+public class Seller implements People {
+    private final String name;
+    private static Integer cnt = 0;
+    private ArrayList<String> possibleStates = new ArrayList<String>();
+    private Iterator<String> possibleStatesIter;
+    private String state;
+    private productStorage basket;
+    private Cashbox cashbox;
+
+    public Seller(String name) {
+        this.name = name;
+        Cashbox cashbox = new Cashbox(0);
+        possibleStates.add("Ожидает");
+        possibleStates.add("Обслуживает покупателя");
+        this.possibleStatesIter = possibleStates.iterator();
+        this.state = possibleStatesIter.next();
     }
 
     public int getMoney() {
-        return 0;
+        return this.cashbox.getMoney();
     }
 
     public void nextState() {
+        this.state = this.possibleStatesIter.next();
+    }
 
+    public void setFirstState() {
+        this.possibleStatesIter = possibleStates.iterator();
+        this.state = possibleStatesIter.next();
     }
 
     public String getState() {
-        return null;
+        return this.state;
     }
 
     public boolean pushProduct(Product product) {
-
-        return false;
-    }
-
-    public void pushProduct() {
-
+        this.basket.pushProduct(product);
+        return true;
     }
 
     public Product popProduct() {
-        return null;
+        return this.basket.popProduct();
     }
 
     public void takeBasket(productStorage basket) {
-
+        this.basket = basket;
     }
 
     public productStorage giveBasket() {
-        return null;
+        productStorage basket = this.basket;
+        this.basket = null;
+        return basket;
     }
 }

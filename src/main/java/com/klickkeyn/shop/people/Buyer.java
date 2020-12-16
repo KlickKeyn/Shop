@@ -10,16 +10,16 @@ public class Buyer implements People {
 
     private static Integer cnt = 0;
     private final String name;
-    private int many;
+    private int money;
     private ArrayList<String> possibleStates = new ArrayList<String>();
     private Iterator<String> possibleStatesIter;
     private String state;
     private productStorage basket;
 
-    public Buyer(int many) {
+    public Buyer(int money) {
         cnt++;
         this.name = "Покупатель №" + cnt.toString();
-        this.many = many;
+        this.money = money;
         possibleStates.add("Пришёл");
         possibleStates.add("Выбирает товар");
         possibleStates.add("Выбрал товар");
@@ -35,7 +35,7 @@ public class Buyer implements People {
     }
 
     public int getMoney() {
-        return this.many;
+        return this.money;
     }
 
     public void nextState() {
@@ -48,7 +48,7 @@ public class Buyer implements People {
 
     public boolean pushProduct(Product product) {
         int newPrice = this.basket.getPrice() + product.getPrice();
-        if (newPrice <= this.many) {
+        if (newPrice <= this.money) {
             this.basket.pushProduct(product);
             return true;
         } else {
@@ -65,11 +65,13 @@ public class Buyer implements People {
     }
 
     public productStorage giveBasket() {
-        return this.basket;
+        productStorage basket = this.basket;
+        this.basket = null;
+        return basket;
     }
 
     public int buy() {
-        this.many -= this.basket.getPrice();
+        this.money -= this.basket.getPrice();
         return this.basket.getPrice();
     }
 }
